@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagabond — Inoue</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 100'%3E%3Cg transform='translate(2,92) scale(0.034,-0.034)' fill='%23000000'%3E%3Cpath d='M2031 2635 c-18 -8 -40 -15 -49 -15 -25 0 -102 -41 -102 -54 0 -7 -18 -28 -39 -47 -28 -24 -50 -59 -76 -119 -20 -47 -43 -99 -51 -117 -8 -17 -14 -38 -14 -46 0 -9 -4 -19 -10 -22 -5 -3 -10 -18 -10 -33 0 -15 -30 -85 -66 -157 -59 -116 -109 -245 -164 -419 -10 -32 -28 -78 -40 -102 -11 -25 -25 -68 -31 -97 -6 -28 -22 -69 -35 -89 -13 -21 -33 -63 -45 -93 -11 -30 -29 -64 -40 -77 -19 -23 -19 -23 -35 -3 -9 11 -20 32 -26 48 -5 15 -14 27 -18 27 -11 0 -95 175 -115 241 -9 30 -21 64 -26 77 -5 13 -9 32 -9 43 0 10 -4 27 -9 37 -14 25 -33 242 -36 414 -2 116 0 150 11 159 19 16 18 45 -6 107 -11 29 -20 68 -20 88 0 43 -22 88 -64 132 -49 52 -89 66 -191 67 -49 0 -101 4 -115 8 -22 7 -35 -1 -103 -65 -42 -40 -77 -79 -77 -86 0 -7 -9 -30 -20 -52 -45 -87 -20 -303 52 -460 17 -36 38 -85 48 -110 10 -25 36 -91 59 -147 23 -56 41 -107 41 -114 0 -22 43 -133 66 -170 13 -20 30 -52 38 -70 9 -19 29 -54 46 -79 16 -25 39 -63 51 -85 12 -22 43 -71 69 -110 66 -98 91 -151 85 -177 -4 -18 7 -36 51 -83 46 -48 63 -77 91 -150 18 -49 44 -100 56 -113 12 -13 22 -35 22 -50 0 -19 6 -27 25 -32 15 -4 26 -15 30 -30 9 -37 42 -32 60 7 20 43 30 41 30 -4 0 -21 6 -58 14 -83 12 -41 17 -46 50 -51 20 -3 39 -2 42 3 9 14 22 9 29 -12 11 -34 33 -23 40 20 4 22 11 40 17 40 5 0 7 9 3 20 -4 13 1 25 14 37 22 18 28 57 11 68 -15 9 -12 61 5 75 20 16 28 85 17 144 -7 34 -6 67 4 115 17 80 18 121 3 121 -14 0 -7 78 16 175 9 39 18 88 21 110 7 53 23 95 45 120 11 13 19 42 22 80 8 122 82 315 208 544 63 115 86 141 124 141 21 0 45 9 63 25 17 14 37 25 46 25 10 0 24 18 36 45 21 48 30 54 54 30 8 -8 22 -15 31 -15 19 0 18 16 -5 96 -11 37 -9 46 19 106 29 60 30 67 17 94 -8 16 -17 53 -21 82 -5 37 -13 55 -26 63 -24 12 -39 4 -39 -22 0 -26 -6 -24 -47 11 -38 34 -53 36 -102 15z'/%3E%3C/g%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: #0a080c;
+            color: #d4cee0;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a080c; }
+        ::-webkit-scrollbar-thumb { background: #3a2a4a; }
+
+        .washi-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(200, 180, 160, 0.03) 2px,
+                    rgba(200, 180, 160, 0.03) 3px
+                );
+        }
+
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 998;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+            mix-blend-mode: overlay;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('wallpaperflare.com_wallpaper.jpg') center center / cover no-repeat;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(10, 8, 12, 0.7) 100%);
+            animation: inkBreathe 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes inkBreathe {
+            0%   { background-color: rgba(60, 40, 100, 0.06); }
+            50%  { background-color: rgba(30, 20, 60, 0.15); }
+            100% { background-color: rgba(80, 50, 120, 0.05); }
+        }
+
+        .sumi-border {
+            position: absolute;
+            z-index: 4;
+            pointer-events: none;
+        }
+        .sumi-border.top    { top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(180, 160, 200, 0.15), transparent); }
+        .sumi-border.bottom { bottom: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(180, 160, 200, 0.15), transparent); }
+
+        .mist-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .splash-canvas {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 65%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.4s ease-out 0.2s forwards;
+        }
+
+        @keyframes heroFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-content .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 5rem;
+            letter-spacing: 0.3em;
+            color: #d4cee0;
+            text-shadow: 0 0 40px rgba(100, 60, 180, 0.25), 0 4px 12px rgba(0,0,0,0.8);
+            margin: 0 auto 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content .sub {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: #c0b8d8;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-content .verse {
+            font-size: 1.2rem;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.9;
+            color: #c0b8d0;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .hero-content .verse em {
+            font-style: italic;
+            color: #d0c8e8;
+        }
+
+        .ink-splash-top {
+            position: absolute;
+            top: 0;
+            right: 10%;
+            z-index: 5;
+            font-size: 8rem;
+            color: rgba(160, 140, 200, 0.2);
+            pointer-events: none;
+            user-select: none;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            color: rgba(180, 160, 200, 0.3);
+            animation: scrollPulse 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+            50%      { opacity: 0.7; transform: translateX(-50%) translateY(6px); }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            background: #0a080c;
+            padding: 8rem 2rem 10rem;
+        }
+
+        .content-inner {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .content .kanji {
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: rgba(180, 160, 200, 0.25);
+            line-height: 1;
+            margin-bottom: -1.5rem;
+            letter-spacing: 0.2em;
+        }
+
+        .content .chapter {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #584870;
+            margin-bottom: 1.5rem;
+        }
+
+        .content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 2.8rem;
+            letter-spacing: 0.08em;
+            color: #c8bcd8;
+            margin-bottom: 2.5rem;
+            line-height: 1.3;
+        }
+
+        .content p {
+            font-size: 1.15rem;
+            font-weight: 400;
+            line-height: 2;
+            color: #b8b0c8;
+            margin-bottom: 1.8rem;
+        }
+
+        .content p.italic {
+            font-style: italic;
+            color: #a8a0b8;
+        }
+
+        .ink-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 3.5rem 0;
+        }
+        .ink-divider .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(140, 120, 170, 0.15), transparent);
+        }
+        .ink-divider .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(140, 120, 170, 0.2);
+        }
+
+        #pivotal-encounters {
+            background: linear-gradient(180deg, #0a080c 0%, #1a0a0c 25%, #2a0e10 50%, #1a080a 80%, #0a080c 100%);
+        }
+
+        .content .moment-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 2.5rem 0;
+            border-radius: 2px;
+            filter: drop-shadow(0 0 30px rgba(100, 60, 180, 0.1));
+            transition: filter 0.6s ease, transform 0.6s ease;
+        }
+        .content .moment-img:hover {
+            transform: scale(1.01);
+            filter: drop-shadow(0 0 40px rgba(100, 60, 180, 0.2));
+        }
+
+        .volumes {
+            position: relative;
+            z-index: 1;
+            padding: 8rem 2rem 10rem;
+            background: linear-gradient(180deg, #0a080c 0%, #120a1a 30%, #1a0e28 60%, #0a080c 100%);
+        }
+
+        .volumes-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .volumes-header .kanji {
+            font-size: 3.5rem;
+            color: rgba(180, 160, 200, 0.25);
+            line-height: 1;
+            margin-bottom: -1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .volumes-header .chapter-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #584870;
+            margin-bottom: 1.5rem;
+        }
+
+        .volumes-header .logo {
+            max-width: 380px;
+            margin: 0 auto 1.5rem;
+            display: block;
+            filter: drop-shadow(0 0 30px rgba(100, 60, 180, 0.15));
+        }
+
+        .volumes-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 2.8rem;
+            letter-spacing: 0.08em;
+            color: #c8bcd8;
+            line-height: 1.3;
+        }
+
+        .volumes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .volume-card {
+            position: relative;
+            background: rgba(20, 14, 30, 0.6);
+            border: 1px solid rgba(160, 140, 200, 0.08);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1),
+                        border-color 0.4s ease,
+                        box-shadow 0.5s ease;
+            cursor: pointer;
+        }
+
+        .volume-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(180, 160, 220, 0.25);
+            box-shadow: 0 20px 60px rgba(80, 40, 140, 0.25),
+                        0 0 40px rgba(120, 80, 200, 0.05);
+        }
+
+        .volume-card-inner {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+        }
+
+        .volume-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease, filter 0.5s ease;
+        }
+
+        .volume-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .volume-card .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(10, 8, 12, 0.4) 0%, transparent 50%);
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .volume-card:hover .card-overlay {
+            opacity: 0.6;
+        }
+
+        .volume-card .card-info {
+            padding: 1rem 0.8rem 0.9rem;
+            background: rgba(20, 14, 30, 0.9);
+            border-top: 1px solid rgba(160, 140, 200, 0.06);
+        }
+
+        .volume-card .card-info .vol-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            color: #786890;
+            margin-bottom: 0.2rem;
+        }
+
+        .volume-card .card-info .vol-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: #c8bcd8;
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+
+        .volume-card:hover .card-info .vol-title {
+            color: #e0d8f0;
+        }
+
+        .volume-card .card-meta {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 8, 12, 0.85);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .volume-card:hover .card-meta {
+            opacity: 1;
+        }
+
+        .volume-card .card-meta .meta-date {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            color: #9888b0;
+            margin-bottom: 0.3rem;
+        }
+
+        .volume-card .card-meta .meta-chapters {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            color: #c8bcd8;
+            font-style: italic;
+        }
+
+        .volume-card .card-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(140, 100, 200, 0.06), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .volume-card:hover .card-glow {
+            opacity: 1;
+        }
+
+        .volumes-footer {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .volumes-footer .ink-line {
+            width: 40px;
+            height: 1px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, transparent, rgba(140, 120, 170, 0.15), transparent);
+        }
+
+        .chapter-view {
+            display: none;
+            padding: 4rem 2rem 6rem;
+            background: linear-gradient(180deg, #0a080c 0%, #120a1a 30%, #1a0e28 60%, #0a080c 100%);
+        }
+        .chapter-view.active { display: block; }
+        .volumes.hidden { display: none; }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .chapter-header .back-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #786890;
+            background: none;
+            border: 1px solid rgba(160, 140, 200, 0.15);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: color 0.3s, border-color 0.3s;
+            margin-bottom: 1.5rem;
+        }
+        .chapter-header .back-btn:hover {
+            color: #c8bcd8;
+            border-color: rgba(160, 140, 200, 0.3);
+        }
+        .chapter-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 2.2rem;
+            color: #c8bcd8;
+            letter-spacing: 0.08em;
+        }
+        .chapter-header .vol-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #584870;
+            margin-top: 0.5rem;
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1.2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .chapter-card {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            background: rgba(20, 14, 30, 0.5);
+            border: 1px solid rgba(160, 140, 200, 0.08);
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1),
+                        border-color 0.3s ease;
+        }
+        .chapter-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(180, 160, 220, 0.25);
+        }
+        .chapter-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .chapter-card:hover img { transform: scale(1.06); }
+        .chapter-card .ch-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(10, 8, 12, 0.7) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .chapter-card .ch-num {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.6rem 0.7rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            color: #d0c8e0;
+            pointer-events: none;
+            letter-spacing: 0.05em;
+        }
+        .chapter-card .ch-num small {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.55rem;
+            color: #8878a0;
+            display: block;
+            margin-top: 0.1rem;
+            letter-spacing: 0.15em;
+        }
+
+        .reader-view {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: #050308;
+            display: none;
+            flex-direction: column;
+        }
+        .reader-view.active { display: flex; }
+
+        .reader-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(10, 8, 12, 0.95);
+            border-bottom: 1px solid rgba(160, 140, 200, 0.06);
+            flex-shrink: 0;
+        }
+        .reader-header .back-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #8878a0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.3rem 0;
+            transition: color 0.3s;
+        }
+        .reader-header .back-btn:hover { color: #d0c8e0; }
+        .reader-header .reader-title {
+            flex: 1;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: #c8bcd8;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+        .reader-header .reader-pages {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            color: #584870;
+            letter-spacing: 0.1em;
+        }
+
+        .reader-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .reader-body img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .reader-body .nav-zone {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 35%;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .reader-body .nav-zone.prev { left: 0; }
+        .reader-body .nav-zone.next { right: 0; }
+        .reader-body .nav-zone:hover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(180, 160, 220, 0.15);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .reader-body .nav-zone.prev:hover::after {
+            left: 1.5rem;
+            border-right: none;
+            border-top: none;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .reader-body .nav-zone.next:hover::after {
+            right: 1.5rem;
+            border-left: none;
+            border-bottom: none;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .reader-body .loading-spinner {
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(160, 140, 200, 0.1);
+            border-top-color: #786890;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .chapter-view { padding: 3rem 1.2rem 4rem; }
+            .chapter-header h2 { font-size: 1.6rem; }
+            .chapter-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.8rem; }
+            .chapter-card .ch-num { font-size: 0.7rem; padding: 0.4rem 0.5rem; }
+            .chapter-card .ch-num small { font-size: 0.5rem; }
+            .reader-header { padding: 0.6rem 1rem; }
+            .reader-body .nav-zone { width: 30%; }
+        }
+        @media (max-width: 600px) {
+            .chapter-view { padding: 2rem 1rem 3rem; }
+            .chapter-header h2 { font-size: 1.3rem; }
+            .chapter-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+            .reader-header .reader-title { font-size: 0.8rem; }
+            .reader-body .nav-zone { width: 25%; }
+        }
+        @media (max-width: 400px) {
+            .chapter-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .volume-card .card-meta {
+                opacity: 1;
+                background: rgba(10, 8, 12, 0.6);
+                backdrop-filter: blur(2px);
+            }
+            .volume-card:hover {
+                transform: none;
+                border-color: rgba(160, 140, 200, 0.08);
+                box-shadow: none;
+            }
+            .volume-card:hover img { transform: none; }
+            .volume-card:hover .card-overlay { opacity: 0.4; }
+            .content .moment-img:hover { transform: none; filter: drop-shadow(0 0 30px rgba(100, 60, 180, 0.1)); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content .logo { font-size: 4rem; }
+            .volumes-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content .logo { font-size: 3.2rem; letter-spacing: 0.25em; }
+            .hero-content .verse { font-size: 1.05rem; }
+            .hero-content .sub { font-size: 0.65rem; }
+
+            .content { padding: 4rem 1.5rem 6rem; }
+            .content h2 { font-size: 2rem; }
+            .content p { font-size: 1.05rem; }
+            .content .kanji { font-size: 2.5rem; }
+
+            .volumes { padding: 4rem 1.5rem 6rem; }
+            .volumes-header h2 { font-size: 2rem; }
+            .volumes-header .kanji { font-size: 2.5rem; }
+            .volumes-header .logo { max-width: 280px; }
+            .volumes-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1.2rem; }
+
+            .volume-card .card-info { padding: 0.7rem 0.6rem 0.8rem; }
+            .volume-card .card-info .vol-title { font-size: 0.75rem; }
+            .volume-card .card-info .vol-num { font-size: 0.5rem; }
+            .ink-splash-top { font-size: 6rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content .logo { font-size: 2.5rem; letter-spacing: 0.15em; }
+            .hero-content .verse { font-size: 0.95rem; max-width: 90%; }
+            .hero-content .sub { font-size: 0.55rem; letter-spacing: 0.3em; margin-bottom: 1.8rem; }
+            .hero-content { padding: 1.5rem; }
+
+            .content { padding: 3rem 1.2rem 4.5rem; }
+            .content h2 { font-size: 1.6rem; }
+            .content p { font-size: 0.95rem; line-height: 1.8; }
+            .content .kanji { font-size: 2rem; }
+            .ink-divider { margin: 2.5rem 0; }
+
+            .volumes { padding: 3rem 1.2rem 4.5rem; }
+            .volumes-header h2 { font-size: 1.6rem; }
+            .volumes-header .kanji { font-size: 2rem; }
+            .volumes-header .logo { max-width: 220px; }
+            .volumes-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+
+            .volume-card .card-meta {
+                inset: auto 0 0 0;
+                flex-direction: row;
+                gap: 0.8rem;
+                background: rgba(10, 8, 12, 0.7);
+                opacity: 1;
+                padding: 0.3rem 0.5rem;
+                justify-content: center;
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
+            }
+            .volume-card .card-meta .meta-date { font-size: 0.45rem; margin-bottom: 0; }
+            .volume-card .card-meta .meta-chapters { font-size: 0.65rem; }
+
+            .scroll-indicator { display: none; }
+            .ink-splash-top { font-size: 4rem; right: 5%; }
+        }
+
+        @media (max-width: 400px) {
+            .hero-content .logo { font-size: 1.8rem; }
+            .hero-content .verse { font-size: 0.85rem; }
+
+            .content { padding: 2rem 1rem 3.5rem; }
+            .content h2 { font-size: 1.3rem; }
+            .content p { font-size: 0.88rem; }
+
+            .volumes { padding: 2rem 1rem 3.5rem; }
+            .volumes-header h2 { font-size: 1.3rem; }
+            .volumes-header .logo { max-width: 160px; }
+            .volumes-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+
+            .volume-card .card-meta .meta-chapters { font-size: 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="washi-overlay"></div>
+<div class="grain-overlay"></div>
+
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <canvas class="mist-canvas" id="mistCanvas"></canvas>
+    <canvas class="splash-canvas" id="splashCanvas"></canvas>
+
+    <div class="sumi-border top"></div>
+    <div class="sumi-border bottom"></div>
+
+    <div class="ink-splash-top">⺀</div>
+
+    <div class="hero-content">
+        <div class="sub">— 宮本武蔵 —</div>
+        <h1 class="logo">VAGABOND</h1>
+        <div class="verse">
+            "There is <em>nothing</em> but this moment.<br>
+            The water is cut — yet it <em>remains</em>."
+        </div>
+    </div>
+
+    <div class="scroll-indicator">▼ SCROLL</div>
+</section>
+
+<section class="content">
+    <div class="content-inner">
+        <div class="kanji reveal">無</div>
+        <div class="chapter reveal">— 空の巻 —</div>
+        <h2 class="reveal">The Book of the Void</h2>
+
+        <p class="reveal">
+            The blade does not cut the water. It merely passes through —
+            and in that instant, the water shows the ronin what he truly is.
+            Not the hand that holds the sword. Not the mind that conceives the strike.
+            Just the space between.
+        </p>
+
+        <div class="ink-divider">
+            <div class="line"></div>
+            <span class="dot"></span>
+            <div class="line"></div>
+        </div>
+
+        <p class="italic reveal">
+            Musashi Miyamoto, at the end of his thousand days of training,
+            understood that the sword is not a weapon. It is a mirror.
+            And in the reflection of still water, even the strongest warrior
+            disappears.
+        </p>
+
+        <div class="ink-divider">
+            <div class="line"></div>
+            <span class="dot"></span>
+            <div class="line"></div>
+        </div>
+
+        <p class="reveal">
+            To be invincible is not to defeat ten thousand men.
+            It is to be so present that no blow can land —
+            because there is no self left to strike.
+            The splash fades. The surface calms.
+            What remains is not nothing.
+            What remains is everything.
+        </p>
+    </div>
+</section>
+
+<section class="volumes">
+    <div class="volumes-header">
+        <div class="kanji reveal">巻</div>
+        <div class="chapter-label reveal">— 十二巻 —</div>
+        <img class="logo reveal" src="Vagabond_logo.svg.png" alt="Vagabond">
+        <h2 class="reveal">The VIZBIG Editions</h2>
+    </div>
+
+    <div class="volumes-grid">
+        <div class="volume-card reveal" data-vol-index="0">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Sep 16, 2008</div>
+                    <div class="meta-chapters">31 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421520544-L.jpg" alt="Vagabond VizBig Vol. 1" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME I</div>
+                <div class="vol-title">Invincible Under the Sun</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="1">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Dec 16, 2008</div>
+                    <div class="meta-chapters">28 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421522449-L.jpg" alt="Vagabond VizBig Vol. 2" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME II</div>
+                <div class="vol-title">Enlightenment</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="2">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Mar 17, 2009</div>
+                    <div class="meta-chapters">28 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421522456-L.jpg" alt="Vagabond VizBig Vol. 3" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME III</div>
+                <div class="vol-title">One With Heaven and Earth</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="3">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Jun 16, 2009</div>
+                    <div class="meta-chapters">30 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421522463-L.jpg" alt="Vagabond VizBig Vol. 4" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME IV</div>
+                <div class="vol-title">Infinite Universe</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="4">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Oct 20, 2009</div>
+                    <div class="meta-chapters">26 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421522470-L.jpg" alt="Vagabond VizBig Vol. 5" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME V</div>
+                <div class="vol-title">The Way of the Sword</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="5">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Feb 16, 2010</div>
+                    <div class="meta-chapters">21 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421522807-L.jpg" alt="Vagabond VizBig Vol. 6" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME VI</div>
+                <div class="vol-title">The War After</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="6">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Apr 20, 2010</div>
+                    <div class="meta-chapters">24 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421522814-L.jpg" alt="Vagabond VizBig Vol. 7" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME VII</div>
+                <div class="vol-title">The Promise</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="7">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Jul 20, 2010</div>
+                    <div class="meta-chapters">27 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421522821-L.jpg" alt="Vagabond VizBig Vol. 8" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME VIII</div>
+                <div class="vol-title">The Way of the Warrior</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="8">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Nov 16, 2010</div>
+                    <div class="meta-chapters">27 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421523132-L.jpg" alt="Vagabond VizBig Vol. 9" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME IX</div>
+                <div class="vol-title">The Sword of the Beast</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="9">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Jul 19, 2011</div>
+                    <div class="meta-chapters">27 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421529158-L.jpg" alt="Vagabond VizBig Vol. 10" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME X</div>
+                <div class="vol-title">The Path of the Ronin</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="10">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Dec 18, 2012</div>
+                    <div class="meta-chapters">27 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421549293-L.jpg" alt="Vagabond VizBig Vol. 11" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME XI</div>
+                <div class="vol-title">The Final Chapter</div>
+            </div>
+        </div>
+        <div class="volume-card reveal" data-vol-index="11">
+            <div class="volume-card-inner">
+                <div class="card-glow"></div>
+                <div class="card-overlay"></div>
+                <div class="card-meta">
+                    <div class="meta-date">Apr 21, 2015</div>
+                    <div class="meta-chapters">31 chapters</div>
+                </div>
+                <img src="https://covers.openlibrary.org/b/isbn/9781421573342-L.jpg" alt="Vagabond VizBig Vol. 12" loading="lazy">
+            </div>
+            <div class="card-info">
+                <div class="vol-num">VOLUME XII</div>
+                <div class="vol-title">The End of the Journey</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="volumes-footer">
+        <div class="ink-line"></div>
+    </div>
+</section>
+
+<section class="chapter-view" id="chapterView">
+    <div class="chapter-header">
+        <button class="back-btn" id="backToVolumes">← Back to Volumes</button>
+        <h2 id="chapterViewTitle">Volume I</h2>
+        <div class="vol-subtitle" id="chapterViewSub">Invincible Under the Sun</div>
+    </div>
+    <div class="chapter-grid" id="chapterGrid"></div>
+</section>
+
+<div class="reader-view" id="readerView">
+    <div class="reader-header">
+        <button class="back-btn" id="backToChapters">← Back</button>
+        <span class="reader-title" id="readerTitle">Chapter 1</span>
+        <span class="reader-pages" id="readerPages">0 / 0</span>
+    </div>
+    <div class="reader-body" id="readerBody">
+        <div class="nav-zone prev" id="navPrev"></div>
+        <img id="readerImage" src="" alt="Chapter page" style="opacity:0; transition: opacity 0.3s;">
+        <div class="loading-spinner" id="readerLoader" style="position:absolute;"></div>
+        <div class="nav-zone next" id="navNext"></div>
+    </div>
+</div>
+
+<section class="content" id="pivotal-encounters">
+    <div class="content-inner">
+        <div class="kanji reveal">奇</div>
+        <div class="chapter reveal">— 邂逅の章 —</div>
+        <h2 class="reveal">Pivotal Encounters</h2>
+
+        <img class="moment-img reveal" src="musashi-ittosai.avif" alt="The Element of Surprise" loading="lazy">
+
+        <p class="reveal">
+            <strong>The Element of Surprise</strong> — In the breath before the strike, the sword
+            that waits in silence strikes before the mind can <em>conceive the thought</em>.
+            Musashi's genius was not in strength, but in the timing that shattered
+            every expectation his opponents held.
+        </p>
+
+        <div class="ink-divider">
+            <div class="line"></div>
+            <span class="dot"></span>
+            <div class="line"></div>
+        </div>
+
+        <img class="moment-img reveal" src="musashi-vs-inshun-2.avif" alt="Blending Into The Darkness" loading="lazy">
+
+        <p class="reveal">
+            <strong>Blending Into The Darkness</strong> — He who merges with the dark becomes
+            <em>invisible</em> — not to the eye, but to the mind. In the void between
+            perception and action, Musashi found his truest weapon: the absence
+            of self that made him impossible to predict.
+        </p>
+
+        <div class="ink-divider">
+            <div class="line"></div>
+            <span class="dot"></span>
+            <div class="line"></div>
+        </div>
+
+        <img class="moment-img reveal" src="kojiro-and-musashi-vagabond.avif" alt="Destined Rivals" loading="lazy">
+
+        <p class="reveal">
+            <strong>Destined Rivals</strong> — Their paths were written long before they ever met —
+            two rivers destined to <em>converge</em> in the same sea. Musashi and Kojirō,
+            bound not by hatred but by the singular pursuit of perfection through the blade.
+        </p>
+
+        <div class="ink-divider">
+            <div class="line"></div>
+            <span class="dot"></span>
+            <div class="line"></div>
+        </div>
+
+        <img class="moment-img reveal" src="kojiro-musashi-vagabond.avif" alt="A Sudden Encounter" loading="lazy">
+
+        <p class="reveal">
+            <strong>A Sudden Encounter</strong> — In the space between one heartbeat and the next,
+            the universe <em>rearranges</em> itself around a single moment. Fate does not
+            announce itself — it arrives without warning, and everything changes.
+        </p>
+    </div>
+</section>
+
+<script>
+    const mistCanvas = document.getElementById('mistCanvas');
+    const mCtx = mistCanvas.getContext('2d');
+    let mistW, mistH;
+
+    function resizeMist() {
+        mistW = mistCanvas.width  = window.innerWidth;
+        mistH = mistCanvas.height = window.innerHeight;
+    }
+    resizeMist();
+    window.addEventListener('resize', resizeMist);
+
+    const particleCount = mistW < 768 ? 40 : mistW < 1024 ? 70 : 120;
+    const mistParticles = [];
+    for (let i = 0; i < particleCount; i++) {
+        mistParticles.push({
+            x: Math.random() * mistW,
+            y: Math.random() * mistH,
+            r: Math.random() * 4 + 1,
+            dx: (Math.random() - 0.5) * 0.15,
+            dy: -(Math.random() * 0.08 + 0.02),
+            alpha: Math.random() * 0.2 + 0.04,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.02 + 0.01,
+        });
+    }
+
+    function drawMist() {
+        mCtx.clearRect(0, 0, mistW, mistH);
+        const t = Date.now() * 0.001;
+        for (const p of mistParticles) {
+            p.x += p.dx;
+            p.y += p.dy;
+            p.pulse += p.pulseSpeed;
+            const pulseAlpha = Math.sin(p.pulse) * 0.06;
+            if (p.x < -10) p.x = mistW + 10;
+            if (p.x > mistW + 10) p.x = -10;
+            if (p.y < -10) p.y = mistH + 10;
+            if (p.y > mistH + 10) p.y = -10;
+            mCtx.beginPath();
+            mCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            mCtx.fillStyle = `hsla(260, 25%, 70%, ${p.alpha + pulseAlpha})`;
+            mCtx.fill();
+        }
+        requestAnimationFrame(drawMist);
+    }
+    drawMist();
+
+    const splashCanvas = document.getElementById('splashCanvas');
+    const sCtx = splashCanvas.getContext('2d');
+    let splashW, splashH;
+
+    function resizeSplash() {
+        splashW = splashCanvas.width  = window.innerWidth;
+        splashH = splashCanvas.height = splashCanvas.parentElement.clientHeight * 0.65;
+    }
+    resizeSplash();
+    window.addEventListener('resize', resizeSplash);
+
+    class SplashParticle {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 6 + 2;
+            this.vx = Math.cos(angle) * speed;
+            this.vy = Math.sin(angle) * speed - 2;
+            this.gravity = 0.08;
+            this.life = 1;
+            this.decay = Math.random() * 0.015 + 0.006;
+            this.size = Math.random() * 3.5 + 1;
+            this.hue = 260 + Math.random() * 30;
+        }
+        update() {
+            this.x += this.vx;
+            this.vy += this.gravity;
+            this.y += this.vy;
+            this.life -= this.decay;
+            this.vx *= 0.98;
+        }
+        draw(ctx) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * this.life, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${this.hue}, 30%, 72%, ${this.life * 0.5})`;
+            ctx.fill();
+        }
+    }
+
+    const splashParticles = [];
+
+    function burstSplash(x, y, count) {
+        for (let i = 0; i < count; i++) {
+            splashParticles.push(new SplashParticle(x, y));
+        }
+    }
+
+    let strikeTimer = 0;
+
+    function animateSplash() {
+        sCtx.clearRect(0, 0, splashW, splashH);
+
+        strikeTimer++;
+
+        if (strikeTimer > 120) {
+            strikeTimer = 0;
+            const cx = splashW * (0.35 + Math.random() * 0.3);
+            const cy = splashH * (0.2 + Math.random() * 0.2);
+            const slashLen = splashW * 0.35;
+            for (let i = 0; i < 40; i++) {
+                const t = i / 40;
+                const offX = (t - 0.5) * slashLen;
+                const offY = Math.sin(t * Math.PI * 4) * 18 + (Math.random() - 0.5) * 12;
+                burstSplash(cx + offX, cy + offY, 4 + Math.floor(Math.random() * 6));
+            }
+        }
+
+        for (let i = splashParticles.length - 1; i >= 0; i--) {
+            const p = splashParticles[i];
+            p.update();
+            p.draw(sCtx);
+            if (p.life <= 0) splashParticles.splice(i, 1);
+        }
+
+        requestAnimationFrame(animateSplash);
+    }
+    animateSplash();
+
+    const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        }
+    }, { threshold: 0.1 });
+
+    for (const el of document.querySelectorAll('.reveal')) {
+        observer.observe(el);
+    }
+
+    const DRIVE_CONFIG = {
+        folderId: '1eu6t-2KmKjYXdnACGhwFAdI1JDDHq2Fz',
+        appsScriptUrl: 'PASTE_APPS_SCRIPT_URL_HERE'
+    };
+
+    const LOCAL_PREFIX = '../vagabond_manga/';
+
+    let driveFileMap = null;
+    let driveReady = false;
+
+    function getImageUrl(volName, chNum, page) {
+        if (driveFileMap) {
+            const key = volName + '/# ' + chNum + '/' + String(page).padStart(3,'0') + '.png';
+            const id = driveFileMap[key];
+            if (id) return 'https://drive.google.com/thumbnail?id=' + id + '&sz=w1920';
+            const jpgKey = volName + '/# ' + chNum + '/' + String(page).padStart(3,'0') + '.jpg';
+            const jpgId = driveFileMap[jpgKey];
+            if (jpgId) return 'https://drive.google.com/thumbnail?id=' + jpgId + '&sz=w1920';
+        }
+        const chFolder = '# ' + chNum;
+        const pageFile = String(page).padStart(3,'0') + '.png';
+        return LOCAL_PREFIX + encodeURIComponent(volName) + '/' + encodeURIComponent(chFolder) + '/' + pageFile;
+    }
+
+    async function initDrive() {
+        if (!DRIVE_CONFIG.folderId || DRIVE_CONFIG.appsScriptUrl === 'PASTE_APPS_SCRIPT_URL_HERE') return;
+        const cacheKey = 'vagabond_drive_map';
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+            try { driveFileMap = JSON.parse(cached); driveReady = true; return; }
+            catch(e) {}
+        }
+        try {
+            const resp = await fetch(DRIVE_CONFIG.appsScriptUrl);
+            if (!resp.ok) throw new Error('Apps Script fetch failed');
+            const data = await resp.json();
+            if (data.error) throw new Error(data.error);
+            driveFileMap = data;
+            localStorage.setItem(cacheKey, JSON.stringify(driveFileMap));
+            driveReady = true;
+        } catch(e) {
+            driveFileMap = null;
+        }
+    }
+
+    initDrive();
+
+    const volumeData = [
+        { name:"Volume I",title:"Invincible Under the Sun",start:1,end:31 },
+        { name:"Volume II",title:"Enlightenment",start:32,end:59 },
+        { name:"Volume III",title:"One With Heaven and Earth",start:60,end:87 },
+        { name:"Volume IV",title:"Infinite Universe",start:88,end:117 },
+        { name:"Volume V",title:"The Way of the Sword",start:118,end:143 },
+        { name:"Volume VI",title:"The War After",start:144,end:164 },
+        { name:"Volume VII",title:"The Promise",start:165,end:188 },
+        { name:"Volume VIII",title:"The Way of the Warrior",start:189,end:215 },
+        { name:"Volume IX",title:"The Sword of the Beast",start:216,end:242 },
+        { name:"Volume X",title:"The Path of the Ronin",start:243,end:269 },
+        { name:"Volume XI",title:"The Final Chapter",start:270,end:296 },
+        { name:"Volume XII",title:"The End of the Journey",start:297,end:327 }
+    ];
+
+    let readerState = { volIdx:0, chNum:0, page:1, maxPage:0 };
+    const volGridSec = document.querySelector('.volumes');
+    const chView = document.getElementById('chapterView');
+    const chGrid = document.getElementById('chapterGrid');
+    const chViewTitle = document.getElementById('chapterViewTitle');
+    const chViewSub = document.getElementById('chapterViewSub');
+    const rView = document.getElementById('readerView');
+    const rTitle = document.getElementById('readerTitle');
+    const rPages = document.getElementById('readerPages');
+    const rImg = document.getElementById('readerImage');
+    const rLoader = document.getElementById('readerLoader');
+
+    function setImgSrc(img, volName, chNum, page, fallbackJpg) {
+        const url = getImageUrl(volName, chNum, page);
+        img.src = url;
+        if (fallbackJpg) {
+            img.onerror = function() {
+                const jpgUrl = getImageUrl(volName, chNum, page);
+                if (jpgUrl !== url) this.src = jpgUrl;
+            };
+        }
+    }
+
+    document.querySelectorAll('.volume-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.volIndex);
+            chViewTitle.textContent = volumeData[idx].name;
+            chViewSub.textContent = volumeData[idx].title;
+            chGrid.innerHTML = '';
+            const vol = volumeData[idx];
+            readerState.volIdx = idx;
+            const frag = document.createDocumentFragment();
+            for (let ch = vol.start; ch <= vol.end; ch++) {
+                const card = document.createElement('div');
+                card.className = 'chapter-card';
+                const img = document.createElement('img');
+                img.alt = 'Chapter ' + ch;
+                img.loading = 'lazy';
+                const ov = document.createElement('div');
+                ov.className = 'ch-overlay';
+                const num = document.createElement('div');
+                num.className = 'ch-num';
+                num.innerHTML = 'Ch. ' + ch + ' <small>' + vol.name + '</small>';
+                card.appendChild(img); card.appendChild(ov); card.appendChild(num);
+                setImgSrc(img, vol.name, ch, 1, true);
+                card.addEventListener('click', function() { openReader(idx, ch); });
+                frag.appendChild(card);
+            }
+            chGrid.appendChild(frag);
+            volGridSec.classList.add('hidden');
+            chView.classList.add('active');
+            window.scrollTo({ top: chView.offsetTop - 10, behavior: 'smooth' });
+        });
+    });
+
+    document.getElementById('backToVolumes').addEventListener('click', function() {
+        chView.classList.remove('active');
+        volGridSec.classList.remove('hidden');
+    });
+
+    function openReader(volIdx, chNum) {
+        const vol = volumeData[volIdx];
+        readerState.volIdx = volIdx; readerState.chNum = chNum;
+        readerState.page = 1; readerState.maxPage = 1;
+        rTitle.textContent = 'Ch. ' + chNum + ' — ' + vol.name;
+        rPages.textContent = '1 / ?';
+        rView.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        rImg.style.opacity = '0';
+        rLoader.style.display = 'block';
+        loadPage(1);
+        probePages(volIdx, chNum);
+    }
+
+    function loadPage(n) {
+        const vol = volumeData[readerState.volIdx];
+        const url = getImageUrl(vol.name, readerState.chNum, n);
+        rLoader.style.display = 'block';
+        rImg.style.opacity = '0';
+        const img = new Image();
+        img.onload = function() {
+            rImg.src = url;
+            rImg.style.opacity = '1';
+            rLoader.style.display = 'none';
+            readerState.page = n;
+            const max = readerState.maxPage > n ? readerState.maxPage : '?';
+            rPages.textContent = n + ' / ' + max;
+        };
+        img.onerror = function() {
+            rLoader.style.display = 'none';
+            if (n === 1) {
+                const jpgUrl = getImageUrl(vol.name, readerState.chNum, 1);
+                if (jpgUrl !== url) { rImg.src = jpgUrl; rImg.style.opacity = '1'; }
+            }
+        };
+        img.src = url;
+    }
+
+    function probePages(volIdx, chNum) {
+        const vol = volumeData[volIdx];
+        let n = 2;
+        function next() {
+            const url = getImageUrl(vol.name, chNum, n);
+            const img = new Image();
+            img.onload = function() {
+                readerState.maxPage = n;
+                if (readerState.page === 1) rPages.textContent = '1 / ' + n;
+                n++; next();
+            };
+            img.onerror = function() {
+                readerState.maxPage = n - 1;
+                rPages.textContent = readerState.page + ' / ' + readerState.maxPage;
+            };
+            img.src = url;
+        }
+        next();
+    }
+
+    function nextPage() { if (readerState.page < readerState.maxPage) loadPage(readerState.page + 1); }
+    function prevPage() { if (readerState.page > 1) loadPage(readerState.page - 1); }
+
+    document.getElementById('navNext').addEventListener('click', nextPage);
+    document.getElementById('navPrev').addEventListener('click', prevPage);
+
+    document.addEventListener('keydown', function(e) {
+        if (!rView.classList.contains('active')) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextPage(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevPage(); }
+        else if (e.key === 'Escape') { closeReader(); }
+    });
+
+    function closeReader() {
+        rView.classList.remove('active');
+        document.body.style.overflow = '';
+        rImg.src = '';
+    }
+    document.getElementById('backToChapters').addEventListener('click', closeReader);
+
+</script>
+
+</body>
+</html>
